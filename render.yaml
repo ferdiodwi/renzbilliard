@@ -1,0 +1,72 @@
+services:
+  - type: web
+    name: renz-billiard
+    env: docker
+    repo: https://github.com/YOUR_USERNAME/renz-billiard
+    branch: main
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_NAME
+        value: RenzBilliard
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://renz-billiard.onrender.com
+      - key: LOG_CHANNEL
+        value: stack
+      - key: LOG_LEVEL
+        value: debug
+      
+      # Database - External MySQL
+      # You will need to manually set these in Render dashboard
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: 3306
+      - key: DB_DATABASE
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      
+      # Cache & Session
+      - key: CACHE_DRIVER
+        value: database
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: SESSION_DRIVER
+        value: database
+      - key: SESSION_LIFETIME
+        value: 120
+      
+      # Mail (optional - can be configured later)
+      - key: MAIL_MAILER
+        value: smtp
+      - key: MAIL_HOST
+        value: mailhog
+      - key: MAIL_PORT
+        value: 1025
+      - key: MAIL_USERNAME
+        value: null
+      - key: MAIL_PASSWORD
+        value: null
+      - key: MAIL_ENCRYPTION
+        value: null
+      - key: MAIL_FROM_ADDRESS
+        value: hello@example.com
+      - key: MAIL_FROM_NAME
+        value: RenzBilliard
+
+    buildCommand: chmod +x ./build.sh && ./build.sh
+    startCommand: php artisan serve --host=0.0.0.0 --port=$PORT
+    
+    healthCheckPath: /
+    
+    autoDeploy: true
