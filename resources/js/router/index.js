@@ -17,6 +17,7 @@ const routes = [
                 path: '',
                 name: 'dashboard',
                 component: () => import('@/pages/DashboardPage.vue'),
+                meta: { adminOnly: true },
             },
             {
                 path: 'tables',
@@ -87,6 +88,18 @@ const routes = [
                 name: 'orders',
                 component: () => import('@/pages/OrdersPage.vue'),
             },
+            {
+                path: 'expenses',
+                name: 'expenses',
+                component: () => import('@/pages/ExpensesPage.vue'),
+                meta: { adminOnly: true },
+            },
+            {
+                path: 'income',
+                name: 'income',
+                component: () => import('@/pages/IncomePage.vue'),
+                meta: { adminOnly: true },
+            },
         ],
     },
 ];
@@ -102,9 +115,11 @@ router.beforeEach((to, from, next) => {
     if (to.meta.requiresAuth && !authStore.isAuthenticated) {
         next({ name: 'login' });
     } else if (to.meta.guest && authStore.isAuthenticated) {
-        next({ name: 'dashboard' });
+        // Redirect authenticated users based on role
+        next(authStore.isAdmin ? { name: 'dashboard' } : { name: 'tables' });
     } else if (to.meta.adminOnly && !authStore.isAdmin) {
-        next({ name: 'dashboard' });
+        // Redirect non-admin to Tables page
+        next({ name: 'tables' });
     } else {
         next();
     }

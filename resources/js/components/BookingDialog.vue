@@ -72,16 +72,12 @@
               <label class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
                 Jam Mulai <span class="text-red-500">*</span>
               </label>
-              <input
+              <TimePicker
                 v-model="form.start_time"
-                type="text"
-                required
-                pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
-                placeholder="HH:mm (contoh: 14:30)"
-                maxlength="5"
-                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-brand-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                placeholder="Pilih jam"
+                :minute-step="1"
               />
-              <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Format 24 jam: 00:00 - 23:59</p>
+              <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Format 24 jam</p>
             </div>
           </div>
 
@@ -97,13 +93,18 @@
                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-brand-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               >
                 <option value="">Pilih durasi</option>
-                <option :value="30">30 menit</option>
                 <option :value="60">1 jam</option>
                 <option :value="120">2 jam</option>
                 <option :value="180">3 jam</option>
                 <option :value="240">4 jam</option>
+                <option :value="300">5 jam</option>
                 <option :value="360">6 jam</option>
+                <option :value="420">7 jam</option>
                 <option :value="480">8 jam</option>
+                <option :value="540">9 jam</option>
+                <option :value="600">10 jam</option>
+                <option :value="660">11 jam</option>
+                <option :value="720">12 jam</option>
               </select>
             </div>
             <div>
@@ -211,6 +212,7 @@
 import { ref, computed, watch } from 'vue'
 import axios from 'axios'
 import { useNotificationStore } from '@/stores/notification'
+import TimePicker from '@/components/ui/TimePicker.vue'
 
 const notify = useNotificationStore()
 
@@ -248,6 +250,24 @@ const form = ref({
   table_id: '',
   rate_id: '',
   notes: '',
+})
+
+// Handle conversion for VueDatePicker
+const startTimeValue = computed({
+  get: () => {
+    if (!form.value.start_time) return null
+    const [hours, minutes] = form.value.start_time.split(':').map(Number)
+    return { hours, minutes }
+  },
+  set: (val) => {
+    if (!val) {
+      form.value.start_time = ''
+    } else {
+      const hours = String(val.hours).padStart(2, '0')
+      const minutes = String(val.minutes).padStart(2, '0')
+      form.value.start_time = `${hours}:${minutes}`
+    }
+  }
 })
 
 // Normalize rates to always be an array and filter out null values

@@ -104,6 +104,16 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // General Order Management
     Route::delete('/orders/{id}', [\App\Http\Controllers\Api\OrderController::class, 'destroy']);
+
+    // Expenses (all authenticated users)
+    Route::get('/expenses', [\App\Http\Controllers\Api\ExpenseController::class, 'index']);
+    Route::post('/expenses', [\App\Http\Controllers\Api\ExpenseController::class, 'store']);
+    Route::get('/expenses/{expense}', [\App\Http\Controllers\Api\ExpenseController::class, 'show']);
+    Route::put('/expenses/{expense}', [\App\Http\Controllers\Api\ExpenseController::class, 'update']);
+    Route::delete('/expenses/{expense}', [\App\Http\Controllers\Api\ExpenseController::class, 'destroy']);
+
+    // Combined Income (billiard + F&B)
+    Route::get('/income', [\App\Http\Controllers\Api\IncomeController::class, 'index']);
     
     // Admin Delete Transaction
     Route::delete('/transactions/{transaction}', [TransactionController::class, 'destroy']);

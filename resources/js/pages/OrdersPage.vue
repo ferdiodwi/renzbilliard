@@ -217,19 +217,7 @@
 
           <!-- Totals -->
           <div class="space-y-2 pt-4 border-t border-gray-200 dark:border-gray-700">
-            <div class="flex justify-between text-sm">
-              <span class="text-gray-600 dark:text-gray-400">Subtotal:</span>
-              <span class="font-medium text-gray-900 dark:text-white">
-                Rp {{ Number(selectedOrder.subtotal).toLocaleString('id-ID') }}
-              </span>
-            </div>
-            <div class="flex justify-between text-sm">
-              <span class="text-gray-600 dark:text-gray-400">Pajak (10%):</span>
-              <span class="font-medium text-gray-900 dark:text-white">
-                Rp {{ Number(selectedOrder.tax).toLocaleString('id-ID') }}
-              </span>
-            </div>
-            <div class="flex justify-between text-lg font-bold pt-2 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-between text-lg font-bold">
               <span class="text-gray-900 dark:text-white">Total:</span>
               <span class="text-brand-500">Rp {{ Number(selectedOrder.total).toLocaleString('id-ID') }}</span>
             </div>

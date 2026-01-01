@@ -9,7 +9,7 @@
       <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
         <div class="flex items-center justify-between">
           <h3 class="text-xl font-semibold text-gray-800 dark:text-white">
-            Pembayaran - {{ sessionData?.table_number }}
+            Pembayaran - Meja {{ sessionData?.table_number }}
           </h3>
           <button
             @click="closeDialog"
@@ -31,7 +31,7 @@
             <h4 class="mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300">Biaya Billiard</h4>
             <div class="space-y-2 text-sm">
               <div class="flex justify-between">
-                <span class="text-gray-600 dark:text-gray-400"> {{ sessionData.table_number }}</span>
+                <span class="text-gray-600 dark:text-gray-400"> Meja {{ sessionData.table_number }}</span>
                 <span class="font-medium text-gray-800 dark:text-white">
                   Rp {{ formatCurrency(sessionData.session_charges) }}
                 </span>
@@ -84,7 +84,7 @@
           <label class="block mb-3 text-sm font-medium text-gray-700 dark:text-gray-300">
             Metode Pembayaran<span class="text-red-500">*</span>
           </label>
-          <div class="grid grid-cols-3 gap-3">
+          <div class="grid grid-cols-2 gap-3">
             <button
               v-for="method in paymentMethods"
               :key="method.value"
@@ -179,7 +179,6 @@ const cashPaid = ref(0)
 const paymentMethods = [
   { value: 'cash', label: 'Tunai', icon: '💵' },
   { value: 'qris', label: 'QRIS', icon: '📱' },
-  { value: 'transfer', label: 'Transfer', icon: '🏦' },
 ]
 
 const handlePayment = async () => {
@@ -251,7 +250,7 @@ const formatCurrency = (value) => {
 
 watch(() => props.sessionData, (newData) => {
   if (newData) {
-    cashPaid.value = Math.ceil((newData.total_charges || 0) / 1000) * 1000 // Round up to nearest 1000
+    cashPaid.value = null // Kosong, tampilkan placeholder
   }
 }, { immediate: true })
 </script>

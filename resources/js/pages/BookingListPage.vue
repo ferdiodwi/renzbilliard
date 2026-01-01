@@ -117,7 +117,7 @@
           <div class="flex-1">
             <div class="flex items-center gap-2 mb-2">
               <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
-                {{ booking.table.table_number }}
+                Meja {{ booking.table.table_number }}
               </h3>
               <span
                 class="px-2 py-1 text-xs font-semibold rounded-full"

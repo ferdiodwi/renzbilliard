@@ -179,6 +179,7 @@ const menuGroups = computed(() => [
         icon: GridIcon,
         name: 'Dashboard',
         path: '/',
+        adminOnly: true,
       },
       {
         icon: TableIcon,
@@ -227,9 +228,23 @@ const menuGroups = computed(() => [
       },
       {
         icon: BarChartIcon,
-        name: 'Laporan',
-        path: '/reports',
+        name: 'Keuangan',
+        path: '/income',
         adminOnly: true,
+        children: [
+            {
+                name: 'Pemasukan',
+                path: '/income',
+            },
+            {
+                name: 'Pengeluaran',
+                path: '/expenses',
+            },
+            {
+                name: 'Laporan',
+                path: '/reports',
+            },
+        ]
       },
       {
         icon: SettingsIcon,

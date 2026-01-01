@@ -73,54 +73,9 @@ class TransactionController extends Controller
 
         $transactions = $query->paginate($perPage);
 
-        // If type is 'session', also fetch unpaid sessions (playing or finished but not paid)
-        $unpaidSessions = [];
-        if ($request->has('type') && $request->type === 'session') {
-            // Check if page is 1 (only show unpaid on first page to act as "pinned" items)
-            if ($request->input('page', 1) == 1) {
-                // Fetch sessions that are:
-                // 1. Finished AND Unpaid
-                // 2. Playing AND Closed Billing (Pay Later) AND Unpaid
-                // EXCLUDE: Playing AND Open Billing (still running, price ongoing)
-                $unpaidQuery = SessionBilliard::with(['table', 'rate'])
-                    ->whereDoesntHave('transactionItem')
-                    ->where(function($q) {
-                        $q->where('status', 'finished')
-                          ->orWhere(function($subQ) {
-                              $subQ->where('status', 'playing')
-                                   ->where('is_open_billing', false);
-                          });
-                    });
-
-                // Apply search if needed (basic search by customer name)
-                if ($request->has('search') && $request->search) {
-                    $unpaidQuery->where('customer_name', 'like', '%' . $request->search . '%');
-                }
-                
-                $unpaidSessions = $unpaidQuery->orderBy('start_time', 'desc')->get()->map(function($session) {
-                    return [
-                        'id' => 'session_' . $session->id, // Virtual ID
-                        'original_id' => $session->id,
-                        'is_virtual' => true,
-                        'invoice_number' => 'SESI-' . $session->table->table_number,
-                        'customer_name' => $session->customer_name, // Direct access
-                        'paid_at' => $session->start_time, // Use start time as date reference
-                        'cashier' => null, // No cashier yet
-                        'payment_method' => '-',
-                        'total_amount' => $session->is_open_billing && $session->status === 'playing' 
-                            ? $session->getCurrentPriceEstimate() 
-                            : $session->total_price,
-                        'status' => 'unpaid', // Virtual status
-                        'type' => 'session_unpaid'
-                    ];
-                });
-            }
-        }
-
         return response()->json([
             'success' => true,
             'data' => $transactions,
-            'unpaid_sessions' => $unpaidSessions,
             'stats' => $stats,
         ]);
     }

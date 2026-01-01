@@ -242,8 +242,11 @@ class PosController extends Controller
                 ]);
             }
 
-            // Mark order as completed
-            $order->update(['status' => 'completed']);
+            // Mark order as completed and save payment method
+            $order->update([
+                'status' => 'completed',
+                'payment_method' => $request->payment_method,
+            ]);
 
             DB::commit();
 

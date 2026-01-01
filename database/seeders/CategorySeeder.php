@@ -28,6 +28,11 @@ class CategorySeeder extends Seeder
                 'description' => 'Produk snack dan cemilan',
                 'color' => '#10b981', // green
             ],
+            [
+                'name' => 'Glove',
+                'description' => 'Sewa Glove',
+                'color' => '#8b5cf6', // purple
+            ],
         ];
 
         foreach ($categories as $category) {

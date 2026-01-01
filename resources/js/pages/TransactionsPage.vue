@@ -216,11 +216,7 @@ const fetchTransactions = async (page = 1) => {
         }
     })
     if (response.data.success) {
-      // Merge unpaid sessions (virtual) at the top
-      const unpaid = response.data.unpaid_sessions || []
-      const realTransactions = response.data.data.data
-      
-      transactions.value = [...unpaid, ...realTransactions]
+      transactions.value = response.data.data.data
       
       // Update stats from backend
       if (response.data.stats) {

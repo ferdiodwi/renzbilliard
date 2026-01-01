@@ -17,42 +17,30 @@ class ProductSeeder extends Seeder
         $makananCatId = Category::where('name', 'Makanan')->value('id');
         $minumanCatId = Category::where('name', 'Minuman')->value('id');
         $snackCatId = Category::where('name', 'Snack')->value('id');
+        $gloveCatId = Category::where('name', 'Glove')->value('id');
 
         $products = [
             // Minuman
-            ['name' => 'Air Mineral', 'category_id' => $minumanCatId, 'price' => 5000, 'stock' => 100, 'is_available' => true],
-            ['name' => 'Teh Botol', 'category_id' => $minumanCatId, 'price' => 7000, 'stock' => 50, 'is_available' => true],
-            ['name' => 'Coca Cola', 'category_id' => $minumanCatId, 'price' => 10000, 'stock' => 50, 'is_available' => true],
-            ['name' => 'Sprite', 'category_id' => $minumanCatId, 'price' => 10000, 'stock' => 50, 'is_available' => true],
-            ['name' => 'Fanta', 'category_id' => $minumanCatId, 'price' => 10000, 'stock' => 50, 'is_available' => true],
-            ['name' => 'Kopi Hitam', 'category_id' => $minumanCatId, 'price' => 8000, 'stock' => 30, 'is_available' => true],
-            ['name' => 'Kopi Susu', 'category_id' => $minumanCatId, 'price' => 10000, 'stock' => 30, 'is_available' => true],
-            ['name' => 'Cappuccino', 'category_id' => $minumanCatId, 'price' => 12000, 'stock' => 30, 'is_available' => true],
-            ['name' => 'Es Teh Manis', 'category_id' => $minumanCatId, 'price' => 6000, 'stock' => 50, 'is_available' => true],
-            ['name' => 'Es Jeruk', 'category_id' => $minumanCatId, 'price' => 8000, 'stock' => 40, 'is_available' => true],
-            ['name' => 'Jus Alpukat', 'category_id' => $minumanCatId, 'price' => 15000, 'stock' => 20, 'is_available' => true],
-            ['name' => 'Jus Mangga', 'category_id' => $minumanCatId, 'price' => 15000, 'stock' => 20, 'is_available' => true],
+            ['name' => 'Kopi hitam', 'category_id' => $minumanCatId, 'price' => 5000, 'stock' => 50, 'is_available' => true],
+            ['name' => 'Kopi susu', 'category_id' => $minumanCatId, 'price' => 7000, 'stock' => 50, 'is_available' => true],
+            ['name' => 'Joshua', 'category_id' => $minumanCatId, 'price' => 7000, 'stock' => 50, 'is_available' => true],
+            ['name' => 'Kubisu', 'category_id' => $minumanCatId, 'price' => 7000, 'stock' => 50, 'is_available' => true],
+            ['name' => 'Matcha es/panas', 'category_id' => $minumanCatId, 'price' => 7000, 'stock' => 50, 'is_available' => true],
+            ['name' => 'Coklat es/panas', 'category_id' => $minumanCatId, 'price' => 7000, 'stock' => 50, 'is_available' => true],
+            ['name' => 'Milo es/panas', 'category_id' => $minumanCatId, 'price' => 7000, 'stock' => 50, 'is_available' => true],
+            ['name' => 'Kopi jahe', 'category_id' => $minumanCatId, 'price' => 7000, 'stock' => 50, 'is_available' => true],
+            ['name' => 'Jeruk es/panas', 'category_id' => $minumanCatId, 'price' => 7000, 'stock' => 50, 'is_available' => true],
+            ['name' => 'Cappucino es/panas', 'category_id' => $minumanCatId, 'price' => 7000, 'stock' => 50, 'is_available' => true],
+            ['name' => 'Teh', 'category_id' => $minumanCatId, 'price' => 5000, 'stock' => 50, 'is_available' => true],
 
-            // Makanan Ringan / Snack
-            ['name' => 'Keripik Kentang', 'category_id' => $snackCatId, 'price' => 12000, 'stock' => 40, 'is_available' => true],
-            ['name' => 'Kacang Atom', 'category_id' => $snackCatId, 'price' => 10000, 'stock' => 40, 'is_available' => true],
-            ['name' => 'Popcorn', 'category_id' => $snackCatId, 'price' => 8000, 'stock' => 30, 'is_available' => true],
-            ['name' => 'Nachos', 'category_id' => $snackCatId, 'price' => 15000, 'stock' => 25, 'is_available' => true],
-            ['name' => 'French Fries', 'category_id' => $snackCatId, 'price' => 18000, 'stock' => 30, 'is_available' => true],
-            ['name' => 'Onion Rings', 'category_id' => $snackCatId, 'price' => 20000, 'stock' => 25, 'is_available' => true],
-            ['name' => 'Es Krim Vanila', 'category_id' => $snackCatId, 'price' => 12000, 'stock' => 25, 'is_available' => true],
-            ['name' => 'Es Krim Cokelat', 'category_id' => $snackCatId, 'price' => 12000, 'stock' => 25, 'is_available' => true],
-            ['name' => 'Brownies', 'category_id' => $snackCatId, 'price' => 15000, 'stock' => 20, 'is_available' => true],
+            // Snack
+            ['name' => 'Kentang goreng', 'category_id' => $snackCatId, 'price' => 8000, 'stock' => 50, 'is_available' => true],
 
-            // Makanan Berat
-            ['name' => 'Nasi Goreng', 'category_id' => $makananCatId, 'price' => 25000, 'stock' => 20, 'is_available' => true],
-            ['name' => 'Mie Goreng', 'category_id' => $makananCatId, 'price' => 22000, 'stock' => 20, 'is_available' => true],
-            ['name' => 'Nasi Ayam Geprek', 'category_id' => $makananCatId, 'price' => 28000, 'stock' => 15, 'is_available' => true],
-            ['name' => 'Nasi Ayam Penyet', 'category_id' => $makananCatId, 'price' => 28000, 'stock' => 15, 'is_available' => true],
-            ['name' => 'Burger Beef', 'category_id' => $makananCatId, 'price' => 30000, 'stock' => 15, 'is_available' => true],
-            ['name' => 'Burger Chicken', 'category_id' => $makananCatId, 'price' => 28000, 'stock' => 15, 'is_available' => true],
-            ['name' => 'Sandwich Club', 'category_id' => $makananCatId, 'price' => 25000, 'stock' => 15, 'is_available' => true],
-            ['name' => 'Pizza Slice', 'category_id' => $makananCatId, 'price' => 20000, 'stock' => 20, 'is_available' => true],
+            // Makanan
+            ['name' => 'Mie goreng jumbo', 'category_id' => $makananCatId, 'price' => 8000, 'stock' => 50, 'is_available' => true],
+            
+            // Glove (unlimited stock - tidak berkurang saat dibeli)
+            ['name' => 'Sewa Glove', 'category_id' => $gloveCatId, 'price' => 3000, 'stock' => null, 'is_available' => true],
         ];
 
         foreach ($products as $product) {
