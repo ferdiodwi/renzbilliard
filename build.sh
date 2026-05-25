@@ -42,3 +42,4 @@ php artisan migrate --force --no-interaction
 # php artisan db:seed --force
 
 echo "✅ Build completed successfully!"
+
